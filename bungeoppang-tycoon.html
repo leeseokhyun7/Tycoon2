@@ -88,6 +88,8 @@ body{
 #introTrack{display:flex;height:100%;transition:transform .42s cubic-bezier(.34,1.4,.64,1)}
 .intro-slide{flex:0 0 100%;height:100%;display:flex;flex-direction:column;align-items:center;
   justify-content:center;gap:6px;padding:14px 30px 6px;text-align:center}
+.intro-slide.img{padding:0}
+.intro-img{width:100%;height:100%;object-fit:contain}
 .intro-stage{width:220px;height:186px;position:relative;display:flex;align-items:center;justify-content:center;
   margin-bottom:6px}
 .intro-badge{background:#fff;color:#e07a2a;font-size:13px;letter-spacing:1px;border:2.5px solid #ffcf8a;
@@ -184,13 +186,14 @@ body{
 .customer.happyPop svg.body,.customer.happyPop img.body{animation:hop .45s ease}
 @keyframes hop{30%{transform:translateY(-14px)}60%{transform:translateY(0)}80%{transform:translateY(-6px)}}
 .bubble{
-  background:#fff;border:3px solid #ffcf8a;border-radius:16px;padding:5px 8px 4px;margin-bottom:5px;min-width:78px;
-  box-shadow:0 4px 10px rgba(150,90,30,.28);position:relative;text-align:center;
+  background:#fff;border:3px solid #ffcf8a;border-radius:18px;padding:7px 12px 6px;margin-bottom:6px;min-width:96px;
+  box-shadow:0 5px 12px rgba(150,90,30,.3);position:relative;text-align:center;
 }
 .bubble::after{content:"";position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
   border:8px solid transparent;border-top-color:#ffcf8a;border-bottom:none}
-.bubble .order-line{display:flex;align-items:center;justify-content:center;gap:3px;font-size:14px;color:var(--ink)}
-.bubble .order-line svg{width:30px;height:19px}
+.bubble .order-line{display:flex;align-items:center;justify-content:center;gap:5px;font-size:18px;color:var(--ink);line-height:1.1}
+.bubble .order-line svg{width:38px;height:24px}
+.bubble .order-line .cnt{font-size:22px;color:#e0562f;font-weight:400}
 .bubble .order-line .done-part{opacity:.3;text-decoration:line-through}
 .patience{height:6px;border-radius:4px;background:#f0e4d0;margin-top:4px;overflow:hidden;border:1px solid #e5d2b5}
 .patience i{display:block;height:100%;border-radius:4px;background:var(--ok);transition:width .3s linear}
@@ -287,20 +290,22 @@ body{
   border-top:5px solid #fff;padding:9px 10px calc(env(safe-area-inset-bottom,0px) + 10px);
   box-shadow:0 -6px 18px rgba(140,80,20,.3);
 }
-#trayRow{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-#trayLabel{color:#fff;font-size:14px;flex:0 0 auto;letter-spacing:1px;
-  background:#b97a3a;padding:6px 11px;border-radius:99px;border:2px solid #ffe2b8;
-  box-shadow:0 3px 0 rgba(140,80,20,.4)}
-#tray{flex:1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+/* 완성 붕어빵 거치대 (화덕 위) */
+#trayRack{position:relative;width:100%;margin:0 auto 8px;min-height:52px;
+  display:flex;align-items:flex-end;justify-content:center}
+#trayRack .rack-shelf{position:absolute;left:4%;right:4%;bottom:0;height:13px;border-radius:7px;z-index:0;
+  background:linear-gradient(180deg,#eeb26a,#c9853e);border:2px solid #fff;
+  box-shadow:0 5px 10px rgba(120,60,20,.4),inset 0 2px 0 rgba(255,255,255,.5)}
+#tray{display:flex;gap:4px;justify-content:center;overflow-x:auto;scrollbar-width:none;
+  padding:0 10px 9px;max-width:100%;position:relative;z-index:1}
 #tray::-webkit-scrollbar{display:none}
-.tray-item{
-  background:#fff;border:2.5px solid #ffd9a0;border-radius:14px;padding:3px 9px;display:flex;align-items:center;gap:5px;
-  color:var(--ink);font-size:16px;box-shadow:0 3px 0 rgba(200,140,60,.4);flex:0 0 auto;
-  transition:transform .15s;
-}
-.tray-item.bump{transform:scale(1.18)}
-.tray-item svg{width:36px;height:23px}
-.tray-empty{color:#fff0d8;font-size:14px;padding:6px 2px;text-shadow:0 1px 0 rgba(140,80,20,.4)}
+.tray-item{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;
+  transition:transform .15s;filter:drop-shadow(0 4px 4px rgba(120,60,10,.3))}
+.tray-item.bump{transform:translateY(-5px) scale(1.12)}
+.tray-item .ficon{width:48px;height:31px}
+.tray-item .tcnt{font-size:12px;color:#7a4a1e;background:#fff;border:1.5px solid #ffd9a0;
+  border-radius:99px;padding:0 7px;margin-top:-5px;box-shadow:0 2px 0 rgba(200,140,60,.4)}
+.tray-empty{color:#8a5a2e;font-size:13px;padding:8px 2px;opacity:.85}
 #fillingBar{display:flex;gap:8px}
 .fill-btn{
   flex:1;border:3px solid #fff;border-radius:16px;padding:7px 4px 6px;cursor:pointer;font-family:inherit;
@@ -365,10 +370,17 @@ body{
 #goalBar{height:100%;width:0%;background:linear-gradient(90deg,#8fd58c,#4db06b);transition:width .4s}
 #goalWrap.done #goalBar{background:linear-gradient(90deg,#ffd25c,#ffab2e)}
 #goalText{position:absolute;inset:0;text-align:center;font-size:11px;line-height:17px;color:#7a5a2e;text-shadow:0 1px 0 rgba(255,255,255,.7)}
-#comboBadge{position:absolute;top:0;right:16px;z-index:4;background:#fff;border:3px solid #ffb85c;color:#ff7a1e;
-  border-radius:99px;padding:4px 14px;font-size:17px;box-shadow:0 4px 10px rgba(150,80,20,.3)}
-#comboBadge.pop{animation:comboPop .3s cubic-bezier(.34,1.8,.64,1)}
-@keyframes comboPop{0%{transform:scale(1.6)}100%{transform:scale(1)}}
+/* 큰 COMBO 버스트 */
+#comboFx{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);z-index:8;pointer-events:none;
+  text-align:center;opacity:0;transition:opacity .18s}
+#comboFx.show{opacity:1}
+#comboFx.pop{animation:comboBurst .5s cubic-bezier(.34,1.8,.5,1)}
+@keyframes comboBurst{0%{transform:translate(-50%,-50%) scale(.35) rotate(-10deg)}
+  55%{transform:translate(-50%,-50%) scale(1.18) rotate(5deg)}100%{transform:translate(-50%,-50%) scale(1) rotate(0)}}
+#comboFx .ctxt{font-size:34px;color:#ff7a1e;-webkit-text-stroke:2px #fff;letter-spacing:2px;line-height:.86;
+  text-shadow:0 3px 0 #fff,0 6px 0 rgba(190,90,30,.75),0 11px 14px rgba(120,60,10,.4)}
+#comboFx .cnum{font-size:48px;color:#ffd25c;-webkit-text-stroke:2px #fff;line-height:.95;
+  text-shadow:0 3px 0 #fff,0 8px 0 #d97e28,0 13px 16px rgba(90,40,0,.5)}
 #feverWrap{position:relative;height:16px;border-radius:99px;background:rgba(0,0,0,.3);margin-bottom:8px;overflow:hidden;border:2px solid rgba(255,230,190,.5)}
 #feverFill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,#ffb85c,#ff6d4e,#ff4e88);transition:width .3s;border-radius:99px}
 #feverLabel{position:absolute;inset:0;text-align:center;font-size:10px;line-height:13px;color:#fff;letter-spacing:2px;text-shadow:0 1px 2px rgba(0,0,0,.4);font-weight:400}
@@ -427,8 +439,9 @@ body{
 #mixerBox svg{width:100%;filter:drop-shadow(0 3px 4px rgba(90,50,10,.35))}
 #mixerBox .mgear,#mixerBox .mgear2{transform-box:fill-box;transform-origin:center;animation:gearSpin 3s linear infinite}
 @keyframes gearSpin{to{transform:rotate(360deg)}}
-.rush .bulb{animation-duration:.9s}
-.rush #gameScreen::after{box-shadow:inset 0 0 70px rgba(246,109,92,.3)}
+#gameScreen.rush::after{box-shadow:inset 0 0 70px rgba(246,109,92,.35)}
+#gameScreen.rush #topbar{animation:rushBlink .6s linear infinite alternate}
+@keyframes rushBlink{from{filter:none}to{filter:brightness(1.12) saturate(1.2)}}
 
 /* ---------- 재료 붕어빵 아이콘 (주문/쟁반/재료버튼 공용) ---------- */
 .ficon{position:relative;display:inline-block;width:34px;height:22px;vertical-align:middle;line-height:0}
@@ -436,7 +449,7 @@ body{
 .ficon .cut{position:absolute;left:37%;top:33%;width:37%;height:42%;border-radius:52% 48% 52% 48%;
   border:1.5px solid rgba(255,241,208,.95);box-shadow:0 1px 2px rgba(90,50,10,.4),inset 0 1px 2px rgba(0,0,0,.3);
   background-size:cover;transform:rotate(-7deg)}
-.bubble .order-line .ficon{width:30px;height:20px}
+.bubble .order-line .ficon{width:40px;height:26px}
 .tray-item .ficon{width:34px;height:22px}
 .fill-btn .ficon{width:40px;height:26px;margin-bottom:1px}
 
@@ -507,17 +520,14 @@ body{
       <button class="icon-btn" id="btnMute">♪</button>
     </div>
     <div id="dayBarWrap"><div id="dayBar"></div></div>
-    <div id="goalWrap"><div id="goalBar"></div><span id="goalText">목표 ₩0 / ₩0</span></div>
-    <div id="lights"></div>
     <div id="street"></div>
-    <div id="grillWrap"><div id="comboBadge" class="hidden">x2 콤보!</div><div id="petCat"></div><div id="mixerBox"></div><div id="grill"></div></div>
+    <div id="grillWrap">
+      <div id="trayRack"><div class="rack-shelf"></div><div id="tray"></div></div>
+      <div id="comboFx" class="hidden"><div class="ctxt">COMBO</div><div class="cnum">x2</div></div>
+      <div id="petCat"></div><div id="mixerBox"></div><div id="grill"></div>
+    </div>
     <div id="bottomPanel">
-      <div id="feverWrap"><i id="feverFill"></i><b id="feverLabel">FEVER</b></div>
-      <div id="trayRow">
-        <span id="kettle"></span>
-        <span id="trayLabel">쟁반</span>
-        <div id="tray"></div>
-      </div>
+      <div id="feverWrap"><i id="feverFill"></i><b id="feverLabel">🔥 피버 게이지 (꽉 차면 판매 2배!)</b></div>
       <div id="fillingBar"></div>
     </div>
   </div>
@@ -578,7 +588,7 @@ function noise(dur,vol){
 /* ---------- 사용자 교체용 사운드 파일 훅 ----------
    assets/ 폴더에 아래 오디오 파일이 있으면 합성음 대신 사용합니다(없으면 기존 합성음).
    pour.mp3(반죽 붓기) flip.mp3(뒤집기) collect.mp3(꺼내기) sell.mp3(판매) burnt.mp3(태움) sizzle.mp3(지글지글·반복)  */
-const SND={pour:null,flip:null,collect:null,sell:null,burnt:null,sizzle:null};
+const SND={pour:null,flip:null,collect:null,sell:null,burnt:null,sizzle:null,bgm:null};
 (function loadSounds(){
   if(typeof Audio==="undefined")return;
   const dir="assets/";
@@ -590,6 +600,8 @@ const SND={pour:null,flip:null,collect:null,sell:null,burnt:null,sizzle:null};
   };
   ld("pour.mp3","pour"); ld("flip.mp3","flip"); ld("collect.mp3","collect");
   ld("sell.mp3","sell"); ld("burnt.mp3","burnt"); ld("sizzle.mp3","sizzle",true);
+  // (선택) 사용자 배경음악: assets/bgm.mp3 가 있으면 생성 음악 대신 이걸 반복 재생
+  ld("bgm.mp3","bgm",true);
 })();
 function playSnd(key){
   const a=SND[key]; if(!a||muted)return false;
@@ -659,7 +671,13 @@ function scheduleBar(t){
   BGM.bar++;
 }
 function startBGM(){
-  const ctx=ac(); if(!ctx||BGM.on)return;
+  const ctx=ac();
+  if(SND.bgm){ // 사용자 배경음악 파일 우선 (생성 음악 대신)
+    SND.bgm.volume=0.5;
+    if(!muted)SND.bgm.play().catch(()=>{});
+    return;
+  }
+  if(!ctx||BGM.on)return;
   BGM.on=true; BGM.next=ctx.currentTime+.15; BGM.bar=0;
   BGM.timer=setInterval(()=>{
     if(!BGM.on||muted||!AC)return;
@@ -745,7 +763,7 @@ function load(){ try{const s=localStorage.getItem("bbt_save"); return s?JSON.par
    fish_raw.png, fish_gold.png, fish_burnt.png (3개 모두 있어야 적용)
    customer_1.png ~ customer_8.png (있는 만큼 랜덤 사용)
    city_bg.png (거리 배경)                                   */
-const IMG={fish:false,fishRaw:"",fishGold:"",fishBurnt:"",customers:[],city:"",fillFish:{},fillTex:{}};
+const IMG={fish:false,fishRaw:"",fishGold:"",fishBurnt:"",customers:[],city:"",fillFish:{},fillTex:{},intro:{}};
 (function loadAssets(){
   if(typeof Image==="undefined")return;
   const dir="assets/";
@@ -758,6 +776,8 @@ const IMG={fish:false,fishRaw:"",fishGold:"",fishBurnt:"",customers:[],city:"",f
   ["red","cream","choco","pizza"].forEach(k=>t("fish_"+k+".png",s=>{if(s)IMG.fillFish[k]=s;}));
   // (선택) 재료별 "속(단면) 질감" 이미지: assets/fill_red.png, fill_cream.png, fill_choco.png, fill_pizza.png
   ["red","cream","choco","pizza"].forEach(k=>t("fill_"+k+".png",s=>{if(s)IMG.fillTex[k]=s;}));
+  // (선택) 직접 만든 인트로/설명 화면: assets/intro_1.png, intro_2.png … (1번부터 이어지는 만큼 사용)
+  for(let i=1;i<=8;i++){ const n=i; t("intro_"+n+".png",s=>{if(s)IMG.intro[n]=s;}); }
   t("city_bg.png",s=>{
     if(s){IMG.city=s;
       document.querySelectorAll("#street .city, #titleCity").forEach(el=>{el.innerHTML='<img class="cityimg" src="'+s+'">'});}
@@ -815,20 +835,21 @@ function addCombo(){
   day.combo++;
   if(day.combo>day.bestCombo)day.bestCombo=day.combo;
   if(day.combo>G.bestCombo)G.bestCombo=day.combo;
-  const b=$("#comboBadge");
+  const fx=$("#comboFx");
   if(day.combo>=2){
-    b.textContent="x"+day.combo+" 콤보!";
-    b.classList.remove("hidden");
-    b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop");
+    fx.querySelector(".cnum").textContent="x"+day.combo;
+    fx.classList.remove("hidden"); fx.classList.add("show");
+    fx.classList.remove("pop"); void fx.offsetWidth; fx.classList.add("pop");
     SFX.combo(Math.min(day.combo,12));
+    clearTimeout(fx._tm); fx._tm=setTimeout(()=>fx.classList.remove("show"),1000);
   }
   addFever(6);
 }
 function resetCombo(){
   if(day.combo>=3)toast("콤보가 끊겼어요!");
-  day.combo=0; $("#comboBadge").classList.add("hidden");
+  day.combo=0; const fx=$("#comboFx"); fx.classList.remove("show"); clearTimeout(fx._tm);
 }
-function comboMult(){ return 1+Math.min(day.combo,20)*0.01; }
+function comboMult(){ return Math.min(3, Math.pow(1.09, Math.min(day.combo,20))); }  // 지수형 · 최대 3배
 function addFever(n){
   if(day.feverOn)return;
   day.fever=clamp(day.fever+n,0,100);
@@ -839,8 +860,8 @@ function startFever(){
   G.feverCount++;
   $("#feverGlow").classList.remove("hidden");
   $("#feverWrap").classList.add("on");
-  $("#feverLabel").textContent="FEVER TIME! 판매가 2배!";
-  toast("피버 타임! 10초간 모든 판매 2배!");
+  $("#feverLabel").textContent="🔥 피버 타임! 판매 2배 (10초)";
+  toast("🔥 피버 타임! 10초간 모든 판매가 2배!",3400);
   SFX.fever(); vibrate([40,40,40,40,80]);
   checkAch();
 }
@@ -848,7 +869,7 @@ function endFever(){
   day.feverOn=false; day.fever=0; day.feverT=0;
   $("#feverGlow").classList.add("hidden");
   $("#feverWrap").classList.remove("on");
-  $("#feverLabel").textContent="FEVER";
+  $("#feverLabel").textContent="🔥 피버 게이지 (꽉 차면 판매 2배!)";
   renderFever();
 }
 function renderFever(){ $("#feverFill").style.width=day.fever+"%"; }
@@ -857,24 +878,9 @@ function perfectFx(m){
   floatText(m.el,"퍼펙트!",false);
   addCombo(); addFever(4); addXP(5);
 }
-function dayGoal(){ return 4000+(G.day-1)*1500; }
-function renderGoal(){
-  const cur=day.revenue+day.tips;
-  $("#goalBar").style.width=clamp(cur/day.goal*100,0,100)+"%";
-  $("#goalText").textContent=(day.goalHit?"목표 달성! ":"오늘 목표 ")+"₩"+cur.toLocaleString()+" / ₩"+day.goal.toLocaleString();
-}
-function checkGoal(){
-  if(!day.goalHit&&day.revenue+day.tips>=day.goal){
-    day.goalHit=true;
-    $("#goalWrap").classList.add("done");
-    const bonus=Math.round(day.goal*0.15/10)*10;
-    G.money+=bonus;
-    toast("일일 목표 달성! 보너스 +"+bonus.toLocaleString()+"원");
-    SFX.goal(); vibrate([20,50,20]);
-    addXP(30);
-  }
-  renderGoal();
-}
+function dayGoal(){ return 0; }        // 오늘 목표 제거
+function renderGoal(){}                 // (제거됨)
+function checkGoal(){}                  // (제거됨)
 
 /* ---------- 업적 ---------- */
 const ACHS=[
@@ -886,7 +892,7 @@ const ACHS=[
  ["fever","불타는 화덕","첫 피버 타임 발동",()=>G.feverCount>=1],
  ["perfect50","완벽주의자","퍼펙트 50회 달성",()=>G.perfects>=50],
  ["week","일주일 장사","7일차 도달",()=>G.day>=7],
- ["streak3","성실한 사장님","일일 목표 3일 연속 달성",()=>G.goalStreak>=3],
+ ["combo15","콤보 고수","콤보 x15 달성",()=>G.bestCombo>=15],
  ["maxrep","소문난 맛집","평판 5.0 달성",()=>G.rep>=4.95],
 ];
 function checkAch(){
@@ -1104,18 +1110,21 @@ function citySVG(){
 /* ---------- 눈 내리기 ---------- */
 (function snow(){
   const cv=$("#snow"),cx=cv.getContext("2d");
+  const DPR=Math.min(devicePixelRatio||1,2);   // 고DPI 기기 부하 상한
   let W,H,flakes=[];
   function resize(){
-    W=cv.width=cv.offsetWidth*devicePixelRatio; H=cv.height=cv.offsetHeight*devicePixelRatio;
-    flakes=Array.from({length:36},()=>({x:Math.random()*W,y:Math.random()*H,r:rnd(1.4,3.6)*devicePixelRatio,s:rnd(14,38)*devicePixelRatio,w:rnd(.4,1.6),p:rnd(0,6.28)}));
+    W=cv.width=cv.offsetWidth*DPR; H=cv.height=cv.offsetHeight*DPR;
+    flakes=Array.from({length:20},()=>({x:Math.random()*W,y:Math.random()*H,r:rnd(1.4,3.4)*DPR,s:rnd(14,34)*DPR,w:rnd(.4,1.6),p:rnd(0,6.28)}));
   }
   resize(); addEventListener("resize",resize);
   let pt=0;
   (function tick(t){
     const dt=Math.min((t-pt)/1000,.05); pt=t;
+    // 탭이 백그라운드면 그리기 생략 (부하 절감)
+    if(document.hidden){ requestAnimationFrame(tick); return; }
     cx.clearRect(0,0,W,H); cx.fillStyle="rgba(255,255,255,.9)";
     for(const f of flakes){
-      f.y+=f.s*dt; f.p+=f.w*dt; f.x+=Math.sin(f.p)*.5*devicePixelRatio;
+      f.y+=f.s*dt; f.p+=f.w*dt; f.x+=Math.sin(f.p)*.5*DPR;
       if(f.y>H+6){f.y=-6;f.x=Math.random()*W}
       cx.beginPath(); cx.arc(f.x,f.y,f.r,0,6.283); cx.fill();
     }
@@ -1127,8 +1136,9 @@ function citySVG(){
 function heatMul(){ return 1/(1+G.upg.heat*0.14); }
 function cookA(){ return 5.2*heatMul(); }   // 앞면
 function cookB(){ return 4.2*heatMul(); }   // 뒷면
-function graceFlip(){ return Math.max(2.2,4.5-(G.day-1)*0.15); }   // 뒤집기 유예 — 날이 갈수록 짧아짐
-function graceDone(){ return Math.max(3.5,7.0-(G.day-1)*0.20); }   // 꺼내기 유예 — 날이 갈수록 짧아짐
+// 화력이 셀수록 굽기도 빠르지만 '타는 유예'도 짧아짐(하이리스크) — heatMul(<1)을 곱함
+function graceFlip(){ return Math.max(2.0,(4.5-(effDay()-1)*0.13)*heatMul()); }   // 뒤집기 유예
+function graceDone(){ return Math.max(3.0,(7.0-(effDay()-1)*0.18)*heatMul()); }   // 꺼내기 유예
 
 /* ---------- 틀(mold) ---------- */
 function moldCount(){ return MOLD_COUNTS[G.upg.molds]; }
@@ -1216,7 +1226,13 @@ function tapMold(m){
   if(m.state==="empty"){
     const f=FILLINGS[selFill];
     if(!G.unlocked[selFill]){toast("아직 잠긴 재료예요");return}
-    if(G.money<f.cost){toast("돈이 부족해요!");SFX.angry();return}
+    if(G.money<f.cost){
+      const cheapest=Math.min.apply(null,FILL_KEYS.filter(k=>G.unlocked[k]).map(k=>FILLINGS[k].cost));
+      if(f.cost<=cheapest){ // 가장 싼 재료는 파산해도 항상 구울 수 있게 비상 지원
+        const aid=f.cost-G.money; G.money=f.cost;
+        toast("비상 재료비 +"+aid.toLocaleString()+"원 지원 — 이걸로 다시 벌어보세요!");
+      } else { toast("돈이 부족해요! 값싼 팥부터 구워 밑천을 마련하세요"); SFX.angry(); return; }
+    }
     G.money-=f.cost; day.cost+=f.cost;
     m.state="cookA"; m.t=0; m.fill=selFill; m.filled=false;
     if(IMG.fish){ m.wrap.innerHTML=fishImgStack(); m.imgRaw=m.wrap.querySelector(".raw"); m.imgGold=m.wrap.querySelector(".gold"); m.imgBurnt=m.wrap.querySelector(".burnt"); }
@@ -1407,7 +1423,7 @@ function renderTray(bumpKey){
     const n=day.tray[k]||0;
     if(n>0){
       any=true;
-      html+='<div class="tray-item" data-k="'+k+'">'+fishIcon(k)+'× '+n+'</div>';
+      html+='<div class="tray-item" data-k="'+k+'">'+fishIcon(k)+'<b class="tcnt">×'+n+'</b></div>';
     }
   }
   t.innerHTML=any?html:'<span class="tray-empty">완성된 붕어빵이 여기 담겨요</span>';
@@ -1443,37 +1459,47 @@ const PERSONA={
   chill:{name:"느긋함",color:"#6dc46b",pat:1.6,pay:1},
   big:{name:"대식가",color:"#e8933d",pat:1.15,pay:1},
   vip:{name:"VIP",color:"#a97ad9",pat:.7,pay:1.6},
+  thug:{name:"진상!",color:"#8a5a3a",pat:.6,pay:0.6},   // 저지불 + 주변 인내심 깎는 방해 손님
 };
 function pickPersona(){
   const d=G.day;
-  // 초반엔 까다로운 손님(바빠요/VIP·재촉)을 줄이고 느긋한 손님을 늘림
-  const busy = d<3?6:(d<6?12:18);
+  // 초반엔 까다로운 손님(바빠요/VIP·진상)을 줄이고 느긋한 손님을 늘림
+  const busy = d<3?6:(d<6?12:16);
   const vip  = d<2?2:(d<5?5:8);
   const big  = d<2?6:10;
+  const thug = d<4?0:(d<8?5:9);        // 진상은 4일차부터, 점점 자주
   const chill= d<3?22:14;
   let r=Math.random()*100;
-  for(const q of [["busy",busy],["chill",chill],["big",big],["vip",vip]]){ if((r-=q[1])<=0)return q[0]; }
+  for(const q of [["busy",busy],["chill",chill],["big",big],["vip",vip],["thug",thug]]){ if((r-=q[1])<=0)return q[0]; }
   return "normal";
 }
 
 /* ---------- 손님 ---------- */
-function maxQueue(){ return (G.day<3?2:3)+((day&&day.rushT>0)?1:0); }
-function patienceTime(){ return Math.max(16, 36-(G.day-1)*1.5)+G.upg.word*3; }   // 초반 넉넉 → 점점 짧게
+function effDay(){ return Math.min(G.day,12); }   // 난이도 상한 — 12일차 이후 더 안 어려워짐
+function maxQueue(){ return (G.day<3?2:3)+((day&&day.rushT>0)?1:0); }   // 최대 4명
+function patienceTime(){ return Math.max(18, 36-(effDay()-1)*1.4)+G.upg.word*3; }   // 초반 넉넉 → 점점 짧게(상한)
 function spawnInterval(){
-  const base=Math.max(2.4, 9.5-G.upg.word*0.7-(G.day-1)*0.55);   // 초반 느긋 → 점점 빠르게
-  return rnd(base*.75,base*1.25);
+  const base=Math.max(2.8, 9.5-G.upg.word*0.7-(effDay()-1)*0.5);   // 초반 느긋 → 점점 빠르게(하한 상향)
+  return rnd(base*.8,base*1.2);
 }
 function makeOrder(big){
   const unlockedKeys=FILL_KEYS.filter(k=>G.unlocked[k]);
-  const maxItems=clamp(1+Math.floor(G.day/2),1,3)+ (Math.random()<.3?1:0);
+  const maxItems=clamp(1+Math.floor(effDay()/3),1,3)+ (Math.random()<.25?1:0);
   let total=ri(1,clamp(maxItems,1,4));
-  if(big)total=clamp(total+2,3,6);
+  if(big)total=clamp(total+1,2,4);
   const order={};
   for(let i=0;i<total;i++){
     const k=unlockedKeys[ri(0,unlockedKeys.length-1)];
     order[k]=(order[k]||0)+1;
   }
   return order;
+}
+function startRush(){
+  day.rushDone=true; day.rushT=12;
+  $("#gameScreen").classList.add("rush");
+  toast("🏃 러시아워! 손님이 몰려옵니다! (대기열 +1, 방문 급증)",3400);
+  SFX.bell(); vibrate([30,40,30,40,60]);
+  day.spawnT=Math.min(day.spawnT,0.5);   // 곧바로 몰리기 시작
 }
 function spawnCustomer(){
   if(customers.length>=maxQueue())return;
@@ -1497,6 +1523,8 @@ function spawnCustomer(){
   $("#street").appendChild(c.el);
   customers.push(c);
   SFX.arrive();
+  if(pk==="thug"){ toast("😤 진상 손님 등장! 주변 손님이 조급해해요",3000); SFX.angry(); }
+  else if(pk==="vip"){ toast("⭐ VIP 손님! 잘 대접하면 큰 팁!",2600); }
   setTimeout(()=>c.el.classList.remove("enter"),520);
 }
 function renderOrder(c){
@@ -1504,7 +1532,7 @@ function renderOrder(c){
   for(const k in c.order){
     const left=c.remaining[k]||0, tot=c.order[k];
     const cls=left===0?"order-line done-part":"order-line";
-    html+='<div class="'+cls+'">'+fishIcon(k)+'× '+(left>0?left:tot)+'</div>';
+    html+='<div class="'+cls+'">'+fishIcon(k)+'<b class="cnt">×'+(left>0?left:tot)+'</b></div>';
   }
   c.bubbleOrders.innerHTML=html;
 }
@@ -1566,6 +1594,8 @@ function leaveCustomer(c,happy){
     if(mouth)mouth.setAttribute("d",MOUTH_SAD);
     resetCombo();
     SFX.angry();
+    if(G.rep<=1.0){ updateHUD(); customers=customers.filter(x=>x!==c); c.el.classList.add("leave"); gameOver(); return; }
+    else if(G.rep<1.6&&!day.repWarned){ day.repWarned=true; toast("⚠️ 평판이 위험해요! 별점 1.0이 되면 폐업합니다",3400); }
   }
   updateHUD();
   setTimeout(()=>{
@@ -1574,10 +1604,33 @@ function leaveCustomer(c,happy){
   },happy?420:80);
   customers=customers.filter(x=>x!==c);
 }
+function gameOver(){
+  running=false; endFever(); setSizzle(0);
+  customers.forEach(x=>{x.el.classList.add("leave");});
+  SFX.burnt(); vibrate([80,60,80,60,120]);
+  showModal(
+    '<h2>폐업…</h2><div class="msub">평판이 바닥나 가게 문을 닫게 됐어요 😢</div>'+
+    '<table class="summary-table">'+
+    '<tr><td>버틴 일수</td><td>'+G.day+'일차</td></tr>'+
+    '<tr><td>누적 판매</td><td>'+G.totalServed+'개</td></tr>'+
+    '<tr><td>누적 수익</td><td>'+fmt(G.totalEarned)+'</td></tr>'+
+    '<tr class="total"><td>최종 레벨</td><td>Lv.'+G.level+' '+titleFor(G.level)+'</td></tr>'+
+    '</table>'+
+    '<div class="msub" style="margin:6px 0 10px">손님을 너무 많이 놓치지 않도록, 러시아워·진상 손님 때 우선순위를 잘 잡아보세요!</div>'+
+    '<div class="modal-btns"><button class="btn" id="btnRetry">처음부터 다시</button></div>'
+  );
+  $("#btnRetry").addEventListener("pointerdown",e=>{
+    e.preventDefault(); hideModal();
+    G=newGame(); save(); selFill="red"; startDay();
+  });
+}
 function updateCustomers(dt){
+  // 진상 손님이 있으면 주변(다른) 손님의 인내심이 더 빨리 닳음
+  const thugPresent=customers.some(c=>c.persId==="thug"&&!c.leaving);
   for(const c of [...customers]){
     if(c.leaving)continue;
     c.t+=dt;
+    if(thugPresent&&c.persId!=="thug")c.t+=dt*0.5;   // 방해 오라 +50% 소모
     const r=clamp(1-c.t/c.max,0,1);
     c.pbar.style.width=(r*100)+"%";
     c.pbar.style.background=r>.5?"var(--ok)":(r>.25?"#f5a83c":"var(--bad)");
@@ -1597,10 +1650,10 @@ function updateHUD(){
     lv.style.background="linear-gradient(90deg,#ffe2a6 "+p+"%,#fff "+p+"%)";
   }
 }
-function toast(msg){
+function toast(msg,dur){
   const t=$("#toast");
   t.textContent=msg; t.classList.add("show");
-  clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove("show"),1600);
+  clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove("show"),dur||2800);
 }
 function floatText(anchor,txt,neg){
   const app=$("#app"),r=anchor.getBoundingClientRect(),ar=app.getBoundingClientRect();
@@ -1626,11 +1679,12 @@ function startDay(){
   }
   day={time:0,revenue:0,cost:0,tips:0,served:0,lost:0,happy:0,burnt:0,service:0,
     tray:{},spawnT:1.2,closing:false,
+    rushT:0, rushDone:(G.day<2), rushAt:rnd(DAY_LENGTH*0.35,DAY_LENGTH*0.6),  // 2일차부터 러시아워 1회
     goal:dayGoal(),goalHit:false,combo:0,bestCombo:0,fever:0,feverOn:false,feverT:0};
+  $("#gameScreen").classList.remove("rush");
   customers.forEach(c=>c.el.remove()); customers=[];
   buildGrill(); renderTray(); renderFillingBar(); updateHUD();
-  $("#goalWrap").classList.remove("done"); renderGoal();
-  $("#comboBadge").classList.add("hidden"); endFever();
+  $("#comboFx").classList.add("hidden"); endFever();
   $("#dayBar").style.width="0%";
   running=true; lastT=performance.now();
   toast(G.day+"일차 장사 시작! — "+titleFor(G.level));
@@ -1652,9 +1706,13 @@ function loop(t){
   const dayRatio=clamp(day.time/DAY_LENGTH,0,1);
   $("#dayBar").style.width=(dayRatio*100)+"%";
 
+  // 러시아워 이벤트
+  if(!day.rushDone && !day.closing && day.time>=day.rushAt) startRush();
+  if(day.rushT>0){ day.rushT-=dt; if(day.rushT<=0){ day.rushT=0; $("#gameScreen").classList.remove("rush"); toast("러시아워 종료 — 한숨 돌리세요"); } }
+
   if(!day.closing){
     day.spawnT-=dt;
-    if(day.spawnT<=0){ spawnCustomer(); day.spawnT=spawnInterval()*(day.feverOn?.5:1); }
+    if(day.spawnT<=0){ spawnCustomer(); day.spawnT=spawnInterval()*(day.feverOn?.5:1)*(day.rushT>0?.5:1); }
     if(day.time>=DAY_LENGTH){ day.closing=true; toast("영업 마감! 남은 손님까지만 받아요"); }
   }
   for(const m of molds)updateMold(m,dt);
@@ -1674,8 +1732,7 @@ function endDay(){
   const profit=day.revenue+day.tips-day.cost;
   const isRecord=profit>G.bestProfit&&profit>0;
   if(isRecord)G.bestProfit=profit;
-  if(day.goalHit)G.goalStreak++; else G.goalStreak=0;
-  addXP(20+(day.goalHit?10:0));
+  addXP(20);
   checkAch();
   showModal(
     '<h2>'+G.day+'일차 마감</h2><div class="msub">오늘 하루도 수고했어요!</div>'+
@@ -1692,7 +1749,6 @@ function endDay(){
     '<tr><td>놓친 손님</td><td>'+day.lost+'명</td></tr>'+
     '<tr><td>태운 붕어빵</td><td>'+day.burnt+'개</td></tr>'+
     '<tr><td>최고 콤보</td><td>x'+day.bestCombo+'</td></tr>'+
-    '<tr><td>일일 목표</td><td class="'+(day.goalHit?'goalHitFx':'')+'">'+(day.goalHit?'달성! (연속 '+G.goalStreak+'일)':'미달성')+'</td></tr>'+
     '</table>'+
     '<div class="modal-btns"><button class="btn" id="btnShop">상점 가기</button></div>'
   );
@@ -1791,24 +1847,38 @@ const INTRO_SLIDES=[
 ];
 function miniW(cls,color){ return '<div class="'+cls+'">'+miniFish(color)+'</div>'; }
 let introIdx=0;
+function introImages(){ const a=[]; for(let i=1;IMG.intro[i];i++)a.push(IMG.intro[i]); return a; }
+function introCount(){ const n=introImages().length; return n>0?n:INTRO_SLIDES.length; }
 function buildIntro(){
   const track=$("#introTrack"); track.innerHTML="";
   const dots=$("#introDots"); dots.innerHTML="";
-  INTRO_SLIDES.forEach((s,i)=>{
-    const el=document.createElement("div");
-    el.className="intro-slide "+s.cls;
-    el.innerHTML=s.art()+'<div class="intro-badge">'+s.badge+'</div>'+
-      '<div class="intro-h">'+s.head+'</div><div class="intro-p">'+s.body+'</div>';
-    track.appendChild(el);
-    const d=document.createElement("i"); dots.appendChild(d);
-  });
+  const imgs=introImages();
+  if(imgs.length){
+    // 사용자가 넣은 인트로 이미지 사용
+    imgs.forEach(src=>{
+      const el=document.createElement("div");
+      el.className="intro-slide img";
+      el.innerHTML='<img class="intro-img" src="'+src+'" alt="">';
+      track.appendChild(el);
+      dots.appendChild(document.createElement("i"));
+    });
+  }else{
+    INTRO_SLIDES.forEach(s=>{
+      const el=document.createElement("div");
+      el.className="intro-slide "+s.cls;
+      el.innerHTML=s.art()+'<div class="intro-badge">'+s.badge+'</div>'+
+        '<div class="intro-h">'+s.head+'</div><div class="intro-p">'+s.body+'</div>';
+      track.appendChild(el);
+      dots.appendChild(document.createElement("i"));
+    });
+  }
 }
 function showIntroSlide(i){
-  introIdx=clamp(i,0,INTRO_SLIDES.length-1);
+  introIdx=clamp(i,0,introCount()-1);
   $("#introTrack").style.transform="translateX("+(-introIdx*100)+"%)";
   $("#introDots").querySelectorAll("i").forEach((d,k)=>d.classList.toggle("on",k===introIdx));
   $("#introPrev").style.visibility=introIdx===0?"hidden":"visible";
-  $("#introNext").textContent=introIdx===INTRO_SLIDES.length-1?"장사 시작! 🐟":"다음";
+  $("#introNext").textContent=introIdx===introCount()-1?"장사 시작! 🐟":"다음";
   SFX.plop();
 }
 function startIntro(){
@@ -1854,25 +1924,6 @@ function init(){
   for(let i=0;i<5;i++)crowd+=customerSVG();
   $("#titleCrowd").innerHTML=crowd;
 
-  // 장식: 전구 스트링 + 구리 주전자
-  const bulbCols=["#ff8a8a","#ffd25c","#8fd58c","#8fc0f2","#f2a0d8"];
-  let lb='<svg viewBox="0 0 480 30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">'+
-    '<path d="M0 6 Q120 26 240 10 Q360 -4 480 14" stroke="rgba(90,60,30,.5)" stroke-width="2.5" fill="none"/>';
-  const by=[10,16,20,17,11,7,6,9,13,15,13,11];
-  for(let i=0;i<12;i++){
-    lb+='<circle class="bulb" style="animation-delay:'+(i*.35)+'s" cx="'+(20+i*40)+'" cy="'+by[i]+'" r="4.2" fill="'+bulbCols[i%bulbCols.length]+'" stroke="rgba(255,255,255,.7)" stroke-width="1.2"/>';
-  }
-  $("#lights").innerHTML=lb+'</svg>';
-  $("#kettle").innerHTML='<div class="ksteam"><i></i><i></i></div>'+
-    '<svg viewBox="0 0 44 36" xmlns="http://www.w3.org/2000/svg">'+
-    '<path d="M8 16 Q2 18 4 24 Q6 28 10 26" fill="none" stroke="#a5641f" stroke-width="3" stroke-linecap="round"/>'+
-    '<path d="M10 14 C10 8 34 8 34 14 L36 28 Q22 34 8 28 Z" fill="#e07a2a" stroke="#a5641f" stroke-width="2.5" stroke-linejoin="round"/>'+
-    '<path d="M32 16 L42 12 L40 20 L33 22 Z" fill="#e07a2a" stroke="#a5641f" stroke-width="2.5" stroke-linejoin="round"/>'+
-    '<path d="M16 10 Q22 2 28 10" fill="none" stroke="#a5641f" stroke-width="3" stroke-linecap="round"/>'+
-    '<circle cx="22" cy="9" r="2.5" fill="#ffd25c" stroke="#a5641f" stroke-width="1.5"/>'+
-    '<path d="M12 18 Q22 22 32 18" stroke="rgba(255,255,255,.35)" stroke-width="2.5" fill="none"/>'+
-    '</svg>';
-
   const saved=load();
   if(saved&&saved.day>1)$("#btnContinue").classList.remove("hidden");
 
@@ -1895,6 +1946,7 @@ function init(){
     muted=!muted;
     $("#btnMute").textContent=muted?"×":"♪";
     setSizzle(0);
+    if(SND.bgm){ if(muted)SND.bgm.pause(); else SND.bgm.play().catch(()=>{}); }
     if(!muted)SFX.tick();
   });
   // iOS 오디오 언락
