@@ -732,18 +732,18 @@ function setSizzle(n){
 
 /* ---------- 게임 데이터 ---------- */
 const FILLINGS={
-  red:  {name:"팥",     color:"#b8465a", price:700,  cost:250, unlockAt:0},
-  cream:{name:"슈크림", color:"#f7d264", price:1000, cost:380, unlockAt:5000},
-  choco:{name:"초코",   color:"#6b4326", price:1300, cost:450, unlockAt:16000},
-  pizza:{name:"피자",   color:"#f2604e", price:1800, cost:650, unlockAt:44000},
+  red:  {name:"팥",     color:"#b8465a", price:520,  cost:250, unlockAt:0},
+  cream:{name:"슈크림", color:"#f7d264", price:760,  cost:380, unlockAt:6000},
+  choco:{name:"초코",   color:"#6b4326", price:1000, cost:450, unlockAt:18000},
+  pizza:{name:"피자",   color:"#f2604e", price:1350, cost:650, unlockAt:48000},
 };
 const FILL_KEYS=Object.keys(FILLINGS);
 
 const UPGRADES={
-  molds:{name:"붕어틀 확장",desc:"굽는 틀 +3개",costs:[11000,34000]},
-  heat: {name:"화력 강화", desc:"굽는 속도↑ (그만큼 타는 속도도↑)",costs:[5000,11000,20000,34000]},
-  word: {name:"입소문",   desc:"손님 방문↑ · 참을성↑",costs:[5000,12000,22000,38000]},
-  pack: {name:"예쁜 포장", desc:"팁 확률과 금액↑",costs:[6000,14000,26000]},
+  molds:{name:"붕어틀 확장",desc:"굽는 틀 +3개",costs:[12000,36000]},
+  heat: {name:"화력 강화", desc:"굽는 속도↑ (그만큼 타는 속도도↑)",costs:[7000,13000,22000,36000]},
+  word: {name:"입소문",   desc:"손님 방문↑ · 참을성↑",costs:[7000,14000,24000,40000]},
+  pack: {name:"예쁜 포장", desc:"팁 확률과 금액↑",costs:[8000,16000,28000]},
 };
 
 const DAY_LENGTH=60;           // 초 (한 라운드 길이)
@@ -869,7 +869,7 @@ function resetCombo(){
   if(day.combo>=3)toast("콤보가 끊겼어요!");
   day.combo=0; const fx=$("#comboFx"); fx.classList.remove("show"); clearTimeout(fx._tm);
 }
-function comboMult(){ return Math.min(3, Math.pow(1.09, Math.min(day.combo,20))); }  // 지수형 · 최대 3배
+function comboMult(){ return Math.min(2, Math.pow(1.06, Math.min(day.combo,20))); }  // 지수형 · 최대 2배
 function addFever(n){
   if(day.feverOn)return;
   day.fever=clamp(day.fever+n,0,100);
