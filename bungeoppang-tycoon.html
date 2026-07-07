@@ -732,18 +732,18 @@ function setSizzle(n){
 
 /* ---------- 게임 데이터 ---------- */
 const FILLINGS={
-  red:  {name:"팥",     color:"#b8465a", price:700,  cost:200, unlockAt:0},
-  cream:{name:"슈크림", color:"#f7d264", price:1000, cost:300, unlockAt:3000},
-  choco:{name:"초코",   color:"#6b4326", price:1300, cost:350, unlockAt:8000},
-  pizza:{name:"피자",   color:"#f2604e", price:1800, cost:500, unlockAt:20000},
+  red:  {name:"팥",     color:"#b8465a", price:700,  cost:250, unlockAt:0},
+  cream:{name:"슈크림", color:"#f7d264", price:1000, cost:380, unlockAt:5000},
+  choco:{name:"초코",   color:"#6b4326", price:1300, cost:450, unlockAt:16000},
+  pizza:{name:"피자",   color:"#f2604e", price:1800, cost:650, unlockAt:44000},
 };
 const FILL_KEYS=Object.keys(FILLINGS);
 
 const UPGRADES={
-  molds:{name:"붕어틀 확장",desc:"굽는 틀 +3개",costs:[6000,18000]},
-  heat: {name:"화력 강화", desc:"굽는 속도 +14%씩",costs:[2500,6000,12000,22000]},
-  word: {name:"입소문",   desc:"손님 방문↑ · 참을성↑",costs:[3000,7000,14000,26000]},
-  pack: {name:"예쁜 포장", desc:"팁 확률과 금액↑",costs:[4000,10000,20000]},
+  molds:{name:"붕어틀 확장",desc:"굽는 틀 +3개",costs:[11000,34000]},
+  heat: {name:"화력 강화", desc:"굽는 속도↑ (그만큼 타는 속도도↑)",costs:[5000,11000,20000,34000]},
+  word: {name:"입소문",   desc:"손님 방문↑ · 참을성↑",costs:[5000,12000,22000,38000]},
+  pack: {name:"예쁜 포장", desc:"팁 확률과 금액↑",costs:[6000,14000,26000]},
 };
 
 const DAY_LENGTH=60;           // 초 (한 라운드 길이)
@@ -760,7 +760,7 @@ let running=false, lastT=0, paused=false;
 
 function newGame(){
   return {
-    money:3000, day:1, rep:3.0,
+    money:1500, day:1, rep:3.0,
     upg:{molds:0,heat:0,word:0,pack:0},
     unlocked:{red:true,cream:false,choco:false,pizza:false},
     totalServed:0, totalEarned:0,
