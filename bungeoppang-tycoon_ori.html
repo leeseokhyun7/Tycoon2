@@ -113,13 +113,6 @@ body{
 #introNav{z-index:3;display:flex;gap:12px;padding:0 24px calc(env(safe-area-inset-bottom,0px) + 20px);width:100%;
   max-width:400px;justify-content:center}
 #introNav .btn{flex:1}
-/* 사용자 제공 인트로 이미지 모드 — 이미지가 화면 전체를 꽉 채우고, 건너뛰기/점/버튼은 그 위에 떠 있음 */
-#introScreen.imgmode .title-awning{display:none}
-#introScreen.imgmode #introViewport{position:absolute;inset:0;margin:0}
-#introScreen.imgmode #introViewport::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;
-  background:linear-gradient(180deg,transparent,rgba(20,15,10,.28));pointer-events:none;z-index:3}
-#introScreen.imgmode #introDots{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 76px);z-index:4;margin:0}
-#introScreen.imgmode #introNav{position:absolute;left:0;right:0;bottom:0;z-index:4}
 /* 슬라이드 아트 애니메이션 */
 .intro-fish-fry{width:150px;filter:drop-shadow(0 8px 10px rgba(120,60,10,.3))}
 .intro-timer-ring{position:absolute;top:6px;right:14px;width:52px;height:52px}
@@ -179,7 +172,7 @@ body{
 
 /* ---------- 손님 거리 ---------- */
 #street{
-  z-index:2;position:relative;flex:0 0 auto;height:198px;display:flex;align-items:flex-end;
+  z-index:2;position:relative;flex:0 0 auto;height:182px;display:flex;align-items:flex-end;
   justify-content:center;gap:6px;padding:0 8px 4px;
 }
 #street .city{position:absolute;left:0;right:0;bottom:22px;height:230px;pointer-events:none;z-index:0}
@@ -189,18 +182,17 @@ body{
     linear-gradient(180deg,#efe4d2,#e3d2b8);
   border-top:3px solid #fff}
 .customer{
-  position:relative;width:112px;height:194px;
+  position:relative;width:112px;display:flex;flex-direction:column;align-items:center;
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;cursor:pointer;z-index:2;
 }
 .customer.enter{animation:walkIn .5s cubic-bezier(.34,1.4,.64,1)}
 @keyframes walkIn{from{transform:translateX(150px);opacity:0}to{transform:translateX(0);opacity:1}}
 .customer.leave{transform:translateX(-170px)!important;opacity:0}
 .customer.happyPop svg.body,.customer.happyPop img.body{animation:hop .45s ease}
-@keyframes hop{30%{transform:translate(-50%,-14px)}60%{transform:translate(-50%,0)}80%{transform:translate(-50%,-6px)}}
+@keyframes hop{30%{transform:translateY(-14px)}60%{transform:translateY(0)}80%{transform:translateY(-6px)}}
 .bubble{
-  position:absolute;left:50%;top:0;transform:translateX(-50%);z-index:2;
-  background:#fff;border:3px solid #ffcf8a;border-radius:18px;padding:7px 12px 6px;min-width:96px;
-  box-shadow:0 5px 12px rgba(150,90,30,.3);text-align:center;
+  background:#fff;border:3px solid #ffcf8a;border-radius:18px;padding:7px 12px 6px;margin-bottom:6px;min-width:96px;
+  box-shadow:0 5px 12px rgba(150,90,30,.3);position:relative;text-align:center;
 }
 .bubble::after{content:"";position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);
   border:8px solid transparent;border-top-color:#ffcf8a;border-bottom:none}
@@ -213,10 +205,8 @@ body{
 .bubble .order-line .done-part{opacity:.3;text-decoration:line-through}
 .patience{height:6px;border-radius:4px;background:#f0e4d0;margin-top:4px;overflow:hidden;border:1px solid #e5d2b5}
 .patience i{display:block;height:100%;border-radius:4px;background:var(--ok);transition:width .3s linear}
-.customer svg.body{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  width:auto;max-width:88px;height:auto;max-height:112px;filter:drop-shadow(0 5px 6px rgba(120,60,10,.3))}
-.customer img.body{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  width:auto;max-width:104px;height:auto;max-height:140px;object-fit:contain;filter:drop-shadow(0 6px 7px rgba(120,60,10,.32))}
+.customer svg.body{width:88px;height:auto;filter:drop-shadow(0 5px 6px rgba(120,60,10,.3))}
+.customer img.body{width:104px;height:auto;filter:drop-shadow(0 6px 7px rgba(120,60,10,.32))}
 .cityimg{width:100%;height:100%;object-fit:cover;object-position:bottom}
 
 /* ---------- 화덕(굽는 판) ---------- */
@@ -318,17 +308,22 @@ body{
 #trayCase::before{content:"완성";position:absolute;top:-11px;left:14px;z-index:2;
   background:#fff;color:#e07a2a;font-size:11px;border:2px solid #ffcf8a;border-radius:99px;padding:1px 10px;
   box-shadow:0 3px 6px rgba(120,60,10,.25)}
-#tray{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:7px;overflow-x:auto;scrollbar-width:none;
+#tray{display:flex;align-items:flex-end;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;
   max-width:100%;min-height:40px}
 #tray::-webkit-scrollbar{display:none}
-.tray-group{display:flex;align-items:center;gap:6px;flex:0 0 auto;background:#fff;
-  border:2px solid #ffe2ba;border-radius:99px;padding:5px 13px 5px 6px;
-  box-shadow:0 3px 0 rgba(190,130,60,.35),inset 0 1px 0 rgba(255,255,255,.7);transition:transform .15s}
-.tray-group.bump{animation:trayBump .24s ease}
-@keyframes trayBump{40%{transform:scale(1.1)}}
-.tray-group .ficon{width:30px;height:19px;flex:0 0 auto}
-.tray-group .tlabel{font-size:13.5px;color:var(--ink);white-space:nowrap}
-.tray-group .tcount{font-size:16px;color:#e0562f;white-space:nowrap}
+.tray-group{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;padding:0 8px;position:relative}
+.tray-group + .tray-group::before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:3px;border-radius:3px;
+  background:rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(160,100,40,.25)}   /* 맛 사이 분리막 */
+.tray-group .tname{font-size:11px;border-radius:99px;padding:1px 9px;margin-bottom:2px;white-space:nowrap;border:1.5px solid rgba(255,255,255,.9);
+  box-shadow:0 2px 0 rgba(120,60,20,.3),inset 0 1px 0 rgba(255,255,255,.35)}
+.tstack{display:flex;align-items:flex-end;padding-left:16px}   /* 겹침 시작 여백 */
+.tstack .tfish{display:block;width:40px;margin-left:-16px;transition:transform .15s;
+  filter:drop-shadow(-2px 3px 2px rgba(120,60,10,.3))}
+.tstack .tfish:first-child{margin-left:0}
+.tstack .tfish img,.tstack .tfish svg{width:100%;height:auto;display:block}
+.tstack .tfish.bump{transform:translateY(-6px) scale(1.08)}
+.tstack .tmore{align-self:center;font-size:12px;color:#7a4a1e;background:#fff;border:1.5px solid #ffd9a0;
+  border-radius:99px;padding:0 6px;margin-left:4px}
 .tray-empty{color:#8a5a2e;font-size:13px;padding:8px 6px;opacity:.9}
 #fillingBar{display:flex;gap:8px}
 .fill-btn{
@@ -412,6 +407,15 @@ body{
 @keyframes feverBlink{from{box-shadow:0 0 6px #ffab2e}to{box-shadow:0 0 18px #ff4e88}}
 #feverGlow{position:absolute;inset:0;z-index:7;pointer-events:none;
   box-shadow:inset 0 0 90px rgba(255,150,40,.55);animation:feverBlink .5s linear infinite alternate}
+#lvlOverlay{position:absolute;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;
+  background:rgba(70,40,10,.45);backdrop-filter:blur(2px);animation:fadeIn .25s}
+@keyframes fadeIn{from{opacity:0}}
+.lvlCard{text-align:center;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.lvlBig{font-size:44px;color:#ffd25c;-webkit-text-stroke:2px #fff;
+  text-shadow:0 4px 0 #d97e28,0 10px 24px rgba(90,40,0,.5);letter-spacing:2px}
+.lvlNum{font-size:30px;color:#fff;text-shadow:0 3px 0 rgba(150,80,20,.6);margin-top:6px}
+.lvlTitle{font-size:19px;color:#fff2cf;margin-top:8px;background:rgba(255,255,255,.16);border-radius:99px;padding:5px 20px;display:inline-block}
+.lvlReward{font-size:16px;color:#aef2a8;margin-top:10px}
 .chart{display:flex;align-items:flex-end;gap:4px;height:64px;margin:6px 0 4px;padding:0 4px}
 .chart i{flex:1;background:linear-gradient(180deg,#ffd25c,#ff9046);border-radius:4px 4px 0 0;min-height:3px;opacity:.55}
 .chart i.cur{opacity:1;box-shadow:0 0 8px rgba(255,150,40,.6)}
@@ -531,6 +535,7 @@ body{
       <span class="chip" id="dayChip">1일차</span>
       <span class="chip" id="moneyChip">₩ 0</span>
       <span class="chip" id="repChip">★ 3.0</span>
+      <span class="chip" id="lvChip">Lv.1</span>
       <button class="icon-btn" id="btnAch">☆</button>
       <button class="icon-btn" id="btnMute">♪</button>
     </div>
@@ -542,13 +547,16 @@ body{
       <div id="petCat"></div><div id="mixerBox"></div><div id="grill"></div>
     </div>
     <div id="bottomPanel">
-      <div id="feverWrap"><i id="feverFill"></i><b id="feverLabel">🔥 피버 게이지 (꽉 차면 판매 1.2배!)</b></div>
+      <div id="feverWrap"><i id="feverFill"></i><b id="feverLabel">🔥 피버 게이지 (꽉 차면 판매 2배!)</b></div>
       <div id="fillingBar"></div>
     </div>
   </div>
 
-  <!-- 피버 연출 -->
+  <!-- 피버/레벨업 연출 -->
   <div id="feverGlow" class="hidden"></div>
+  <div id="lvlOverlay" class="hidden">
+    <div class="lvlCard"><div class="lvlBig">LEVEL UP!</div><div class="lvlNum"></div><div class="lvlTitle"></div><div class="lvlReward"></div></div>
+  </div>
 
   <!-- 모달 -->
   <div id="modalOverlay" class="hidden"><div id="modalCard"></div></div>
@@ -631,6 +639,7 @@ const SFX={
   buy(){ tone(587,.08,"triangle",.12); tone(880,.16,"triangle",.12,.07); },
   tick(){ tone(1200,.04,"sine",.05); },
   combo(n){ tone(440+n*70,.09,"square",.1); tone((440+n*70)*1.5,.12,"square",.07,.06); },
+  levelup(){ [523,659,784,1047,1319].forEach((f,i)=>tone(f,.18,"square",.1,i*.09)); },
   fever(){ [392,523,659,784,1047].forEach((f,i)=>tone(f,.12,"sawtooth",.08,i*.06)); },
   goal(){ tone(784,.1,"triangle",.12); tone(988,.1,"triangle",.12,.08); tone(1175,.2,"triangle",.12,.16); },
   ach(){ tone(880,.1,"sine",.12); tone(1320,.18,"sine",.1,.09); },
@@ -740,7 +749,6 @@ const UPGRADES={
 const DAY_LENGTH=60;           // 초 (한 라운드 길이)
 const MOLD_COUNTS=[6,9,12];    // 업그레이드 단계별 틀 수
 const GRID_COLS=[3,3,4];
-const FEVER_MAX=200;            // 피버 게이지 필요량 (기존 100 → 너무 자주 터져서 2배로 상향)
 
 /* ---------- 상태 ---------- */
 let G=null;          // 영구 상태(저장됨)
@@ -756,7 +764,7 @@ function newGame(){
     upg:{molds:0,heat:0,word:0,pack:0},
     unlocked:{red:true,cream:false,choco:false,pizza:false},
     totalServed:0, totalEarned:0,
-    perfects:0, bestProfit:0, bestCombo:0,
+    xp:0, level:1, perfects:0, bestProfit:0, bestCombo:0,
     goalStreak:0, feverCount:0, history:[], ach:{},
     pets:{}, vipServed:0,
   };
@@ -820,6 +828,29 @@ function paintFish(m,color,goldT,burnT){
 function setBar(m,pct){ pct=Math.round(pct); if(m.barPct!==pct){ m.barPct=pct; m.bar.style.width=pct+"%"; } }
 
 /* ---------- 성장/콤보/피버 시스템 ---------- */
+const TITLES=[[1,"견습 굽사"],[3,"동네 굽사"],[5,"골목 명인"],[8,"거리의 스타"],[12,"붕어빵 장인"],[16,"전설의 타이쿤"]];
+function titleFor(lv){let t=TITLES[0][1];for(const p of TITLES)if(lv>=p[0])t=p[1];return t}
+function xpNeed(lv){return 120+(lv-1)*80}
+function addXP(n){
+  G.xp+=n;
+  while(G.xp>=xpNeed(G.level)){
+    G.xp-=xpNeed(G.level); G.level++;
+    const reward=G.level*300;
+    G.money+=reward;
+    levelUpFx(reward);
+  }
+  updateHUD();
+}
+function levelUpFx(reward){
+  const ov=$("#lvlOverlay");
+  ov.querySelector(".lvlNum").textContent="Lv."+(G.level-1)+" → Lv."+G.level;
+  ov.querySelector(".lvlTitle").textContent="칭호: "+titleFor(G.level);
+  ov.querySelector(".lvlReward").textContent="레벨 보너스 +"+reward.toLocaleString()+"원";
+  ov.classList.remove("hidden");
+  SFX.levelup(); vibrate([30,60,30,60,60]);
+  paused=true;
+  setTimeout(()=>{ov.classList.add("hidden");paused=false;},1900);
+}
 function addCombo(){
   day.combo++;
   if(day.combo>day.bestCombo)day.bestCombo=day.combo;
@@ -841,16 +872,16 @@ function resetCombo(){
 function comboMult(){ return Math.min(2, Math.pow(1.06, Math.min(day.combo,20))); }  // 지수형 · 최대 2배
 function addFever(n){
   if(day.feverOn)return;
-  day.fever=clamp(day.fever+n,0,FEVER_MAX);
-  if(day.fever>=FEVER_MAX)startFever(); else renderFever();
+  day.fever=clamp(day.fever+n,0,100);
+  if(day.fever>=100)startFever(); else renderFever();
 }
 function startFever(){
-  day.feverOn=true; day.feverT=10; day.fever=FEVER_MAX; renderFever();
+  day.feverOn=true; day.feverT=10; day.fever=100; renderFever();
   G.feverCount++;
   $("#feverGlow").classList.remove("hidden");
   $("#feverWrap").classList.add("on");
-  $("#feverLabel").textContent="🔥 피버 타임! 판매 1.2배 (10초)";
-  toast("🔥 피버 타임! 10초간 모든 판매가 1.2배!",3400);
+  $("#feverLabel").textContent="🔥 피버 타임! 판매 2배 (10초)";
+  toast("🔥 피버 타임! 10초간 모든 판매가 2배!",3400);
   SFX.fever(); vibrate([40,40,40,40,80]);
   checkAch();
 }
@@ -858,14 +889,14 @@ function endFever(){
   day.feverOn=false; day.fever=0; day.feverT=0;
   $("#feverGlow").classList.add("hidden");
   $("#feverWrap").classList.remove("on");
-  $("#feverLabel").textContent="🔥 피버 게이지 (꽉 차면 판매 1.2배!)";
+  $("#feverLabel").textContent="🔥 피버 게이지 (꽉 차면 판매 2배!)";
   renderFever();
 }
-function renderFever(){ $("#feverFill").style.width=(day.fever/FEVER_MAX*100)+"%"; }
+function renderFever(){ $("#feverFill").style.width=day.fever+"%"; }
 function perfectFx(m){
   G.perfects++;
   floatText(m.el,"퍼펙트!",false);
-  addFever(4);
+  addCombo(); addFever(4); addXP(5);
 }
 function dayGoal(){ return 0; }        // 오늘 목표 제거
 function renderGoal(){}                 // (제거됨)
@@ -896,7 +927,7 @@ function checkAch(){
 function openAch(){
   if(!running)return;
   paused=true;
-  let html='<h2>업적</h2><div class="msub">'+Object.keys(G.ach).length+' / '+ACHS.length+' 달성</div>';
+  let html='<h2>업적</h2><div class="msub">'+Object.keys(G.ach).length+' / '+ACHS.length+' 달성 · Lv.'+G.level+' '+titleFor(G.level)+'</div>';
   for(const a of ACHS){
     const got=!!G.ach[a[0]];
     html+='<div class="ach-item'+(got?" got":"")+'"><div class="bd">'+(got?"★":"?")+'</div>'+
@@ -1251,23 +1282,20 @@ function tapMold(m){
     if(perfect)perfectFx(m);
   }
   else if(m.state==="done"){
-    collectToTray(m);
+    const perfect=m.t<=1.5;
+    day.tray[m.fill]=(day.tray[m.fill]||0)+1;
+    m.el.classList.remove("attn");
+    sparkAt(m.el);
+    SFX.collect(); vibrate(14);
+    if(perfect)perfectFx(m); else addFever(2);
+    m.state="empty"; renderMoldEmpty(m);
+    renderTray(m.fill);
   }
   else if(m.state==="burnt"){
     m.state="empty"; renderMoldEmpty(m);
     toast("탄 붕어빵을 버렸어요…");
     SFX.burnt(); vibrate([20,40,20]);
   }
-}
-function collectToTray(m){
-  const perfect=m.t<=1.5;
-  day.tray[m.fill]=(day.tray[m.fill]||0)+1;
-  m.el.classList.remove("attn");
-  sparkAt(m.el);
-  SFX.collect(); vibrate(14);
-  if(perfect)perfectFx(m); else addFever(2);
-  m.state="empty"; renderMoldEmpty(m);
-  renderTray(m.fill);
 }
 
 /* ---------- 틀 조작: 탭 vs 드래그(서비스) ---------- */
@@ -1281,7 +1309,7 @@ function attachMold(m){
     const move=ev=>{
       const dx=ev.clientX-sx, dy=ev.clientY-sy;
       if(!dragging){
-        if(canDrag && Math.abs(dx)+Math.abs(dy)>20){
+        if(canDrag && Math.abs(dx)+Math.abs(dy)>12){
           dragging=true;
           m.el.classList.add("grabbing");
           ghost=makeGhost(m);
@@ -1301,9 +1329,7 @@ function attachMold(m){
       if(ghost)ghost.remove();
       if(dragging){
         const c=customerAt(ev.clientX,ev.clientY);
-        if(c)serviceCustomer(m,c);
-        else if(m.state==="done")collectToTray(m);   // 손님을 놓쳐도 붕어빵이 사라지지 않고 진열대로
-        else discardMold(m);
+        if(c)serviceCustomer(m,c); else discardMold(m);
       }else{
         tapMold(m);
       }
@@ -1332,11 +1358,11 @@ function customerAt(x,y){
 function serviceCustomer(m,c){
   if(m.state==="done"){
     // 잘 익은 붕어빵 서비스 → 팁
-    let tip=Math.round((120+G.upg.pack*80+(G.rep-3)*40)*(day.feverOn?1.2:1)/10)*10;
+    let tip=Math.round((120+G.upg.pack*80+(G.rep-3)*40)*(day.feverOn?2:1)/10)*10;
     tip=Math.max(60,tip);
     G.money+=tip; day.tips+=tip; day.service=(day.service||0)+1;
     G.rep=clamp(G.rep+0.05,1,5);
-    addCombo(); addFever(8);
+    addCombo(); addFever(8); addXP(6);
     floatText(c.el,"서비스! 팁 +"+tip,false);
     c.el.classList.add("happyPop");
     const mo=c.el.querySelector(".mouth"); if(mo)mo.setAttribute("d",MOUTH_HAPPY);
@@ -1412,22 +1438,28 @@ function sparkAt(el){
 }
 
 /* ---------- 쟁반 ---------- */
+function trayFish(){ return IMG.fish ? '<img src="'+IMG.fishGold+'" alt="">' : miniFish("#e8a53f"); }
+function labelTextColor(hex){ const p=h=>parseInt(hex.slice(h,h+2),16); const lum=0.299*p(1)+0.587*p(3)+0.114*p(5); return lum>150?"#5a3a22":"#fff"; }
 function renderTray(bumpKey){
   const t=$("#tray");
+  const CAP=10;
   let html="",any=false;
   for(const k of FILL_KEYS){
     const n=day.tray[k]||0;
     if(n<=0)continue;
     any=true;
+    const show=Math.min(n,CAP);
+    let fishes="";
+    for(let i=0;i<show;i++)fishes+='<span class="tfish" style="z-index:'+i+'">'+trayFish()+'</span>';
+    const more=n>CAP?'<span class="tmore">+'+(n-CAP)+'</span>':'';
     html+='<div class="tray-group" data-k="'+k+'">'+
-      fishIcon(k)+
-      '<span class="tlabel">'+FILLINGS[k].name+' 붕어빵</span>'+
-      '<span class="tcount">×'+n+'</span></div>';
+      '<span class="tname" style="background:'+FILLINGS[k].color+';color:'+labelTextColor(FILLINGS[k].color)+'">'+FILLINGS[k].name+'</span>'+
+      '<div class="tstack">'+fishes+more+'</div></div>';
   }
   t.innerHTML=any?html:'<span class="tray-empty">완성된 붕어빵이 여기 진열돼요</span>';
   if(bumpKey){
-    const grp=t.querySelector('.tray-group[data-k="'+bumpKey+'"]');
-    if(grp){ grp.classList.add("bump"); setTimeout(()=>grp.classList.remove("bump"),220); }
+    const st=t.querySelector('.tray-group[data-k="'+bumpKey+'"] .tstack');
+    if(st){ const last=st.querySelector('.tfish:last-of-type'); if(last){last.classList.add("bump");setTimeout(()=>last.classList.remove("bump"),200);} }
   }
 }
 
@@ -1567,12 +1599,13 @@ function serveCustomer(c){
     }
   }
   if(!servedAny){
-    toast("주문한 붕어빵이 진열대에 없어요");
+    toast("주문한 붕어빵이 쟁반에 없어요");
     return;
   }
-  revenue=Math.round(revenue*comboMult()*(day.feverOn?1.2:1)/10)*10;
+  revenue=Math.round(revenue*comboMult()*(day.feverOn?2:1)/10)*10;
   G.money+=revenue; day.revenue+=revenue; day.served+=servedCount;
   G.totalServed+=servedCount; G.totalEarned+=revenue;
+  addXP(servedCount*8);
   checkGoal(); checkAch();
   renderTray(); renderOrder(c); updateHUD();
   SFX.sell(); vibrate(18);
@@ -1593,7 +1626,7 @@ function serveCustomer(c){
     }
     G.rep=clamp(G.rep+0.06,1,5);
     day.happy++;
-    addCombo(); addFever(10);
+    addCombo(); addFever(10); addXP(15);
     if(ratio>.6){ addCombo(); setTimeout(()=>floatText(c.el,"빠른 서빙! +콤보",false),200); }
     if(c.persId==="vip"){ G.vipServed=(G.vipServed||0)+1; G.rep=clamp(G.rep+0.1,1,5); addFever(20); sparkAt(c.el); }
     checkGoal();
@@ -1633,7 +1666,8 @@ function gameOver(){
     '<table class="summary-table">'+
     '<tr><td>버틴 일수</td><td>'+G.day+'일차</td></tr>'+
     '<tr><td>누적 판매</td><td>'+G.totalServed+'개</td></tr>'+
-    '<tr class="total"><td>누적 수익</td><td>'+fmt(G.totalEarned)+'</td></tr>'+
+    '<tr><td>누적 수익</td><td>'+fmt(G.totalEarned)+'</td></tr>'+
+    '<tr class="total"><td>최종 레벨</td><td>Lv.'+G.level+' '+titleFor(G.level)+'</td></tr>'+
     '</table>'+
     '<div class="msub" style="margin:6px 0 10px">손님을 너무 많이 놓치지 않도록, 러시아워·진상 손님 때 우선순위를 잘 잡아보세요!</div>'+
     '<div class="modal-btns"><button class="btn" id="btnRetry">처음부터 다시</button></div>'
@@ -1664,6 +1698,12 @@ function updateHUD(){
   $("#dayChip").textContent=G.day+"일차";
   $("#moneyChip").textContent=fmt(G.money);
   $("#repChip").textContent="★ "+G.rep.toFixed(1);
+  const lv=$("#lvChip");
+  if(lv){
+    lv.textContent="Lv."+G.level;
+    const p=Math.round(G.xp/xpNeed(G.level)*100);
+    lv.style.background="linear-gradient(90deg,#ffe2a6 "+p+"%,#fff "+p+"%)";
+  }
 }
 function toast(msg,dur){
   const t=$("#toast");
@@ -1702,7 +1742,7 @@ function startDay(){
   $("#comboFx").classList.add("hidden"); endFever();
   $("#dayBar").style.width="0%";
   running=true; lastT=performance.now();
-  toast(G.day+"일차 장사 시작!");
+  toast(G.day+"일차 장사 시작! — "+titleFor(G.level));
   requestAnimationFrame(loop);
   if(!G.hintService){ G.hintService=1; save();
     setTimeout(()=>{ if(running)toast("완성·탄 붕어빵을 손님에게 끌어다 놓으면 '서비스' 🎁"); },5000); }
@@ -1713,7 +1753,7 @@ function loop(t){
   const dt=Math.min((t-lastT)/1000,.06); lastT=t;
   day.time+=dt;
   if(day.feverOn){
-    day.feverT-=dt; day.fever=clamp(day.feverT/10*FEVER_MAX,0,FEVER_MAX); renderFever();
+    day.feverT-=dt; day.fever=clamp(day.feverT/10*100,0,100); renderFever();
     if(day.feverT<=0)endFever();
   }else if(day.fever>0){
     day.fever=Math.max(0,day.fever-dt*1.2); renderFever();
@@ -1747,6 +1787,7 @@ function endDay(){
   const profit=day.revenue+day.tips-day.cost;
   const isRecord=profit>G.bestProfit&&profit>0;
   if(isRecord)G.bestProfit=profit;
+  addXP(20);
   checkAch();
   showModal(
     '<h2>'+G.day+'일차 마감</h2><div class="msub">오늘 하루도 수고했어요!</div>'+
@@ -1867,7 +1908,6 @@ function buildIntro(){
   const track=$("#introTrack"); track.innerHTML="";
   const dots=$("#introDots"); dots.innerHTML="";
   const imgs=introImages();
-  $("#introScreen").classList.toggle("imgmode",imgs.length>0);
   if(imgs.length){
     // 사용자가 넣은 인트로 이미지 사용
     imgs.forEach(src=>{
